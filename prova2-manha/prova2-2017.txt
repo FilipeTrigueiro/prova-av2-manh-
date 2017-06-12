@@ -1,0 +1,154 @@
+Unilasalle-RJ - AV2
+Aluno: (Filipe Trigueiro da Silva - Matricula:0050009165)
+Prova Av2 de Laboratorio de Sistemas Operacionais
+Professor: Alex Salgado
+1o. Semestre de 2017   Turno: Manha
+--------------------------------------------------
+1-Faça um script shell que:
+- Pergunte por um nome e crie uma pasta e um arquivo.txt com o mesmo nome inserido.
+Resposta:
+
+#!/bin/bash
+
+echo "Informe o seu nome"
+
+read NOME
+
+mkdir $NOME
+
+cd $NOME
+
+touch $NOME"1".txt 
+
+
+2-Quantos erros tem no script abaixo? Qual(is) são eles?
+case "$file" in
+    *.txt}
+        echo "É um arquivo de texto."
+        cat "$file"
+        
+    *.gif|*.jpg|*.png}
+        echo "É uma figura."
+        xloadimage "$file"
+        
+    *}
+        echo "Não sei que arquivo é esse."
+        
+esac
+Resposta:
+-O certo e *) e não *} ;
+-O *.gif|*.jpg|*.png} está errado. Além de usar } ao invés de ) está usando 
+uma única parte do comando case para indicar que é gif,jpeg ou png
+=> (*.gif|*.jpg|*.png}
+-Está usando "" no $file => case "$file" in
+3 Erros!
+
+
+3-Usando estrutura de repetição, faça um script para exibir todos os arquivos
+da pasta atual com tamanho maior que 500kb.
+Resposta:
+
+#!/bin/bash
+
+arq=$1
+for arq in $1
+do
+  if [ -f $arq -gt 500 ]
+  then
+    echo -e $(ls)
+  else
+    echo -e "Menor que 500"
+  fi
+done
+
+4-Usando estrutura de repetição, faça um script para calcular e exibir quantas
+pastas e quantos arquivos tem na pasta atual.
+Resposta:
+#!/bin/bash
+
+for arq in $(ls -l)
+do
+   echo "$arq"
+done
+
+5-Faça um script que leia um numero IP e retorna se endereço responde ou não ao 
+comando ping.
+Além disso, se for digitado um ip vazio, o script deve informar ao usuario.
+Resposta:
+#!/bin/bash
+
+echo "Informe o numero IP:"
+read IP
+
+if [ ! -z ping $IP ]; then
+
+   ping -c 1 $IP
+   if [ $? -eq 0 ]; then
+     echo "Está retornando o IP!"
+   else
+     echo "Não está pingando!"
+   fi
+else
+  echo "IP vazio!"
+fi
+
+Respostas aqui:
+1-#!/bin/bash
+
+echo "Informe o seu nome"
+
+read NOME
+
+mkdir $NOME
+
+cd $NOME
+
+touch $NOME"1".txt 
+-------------------------------
+
+2-Resposta:
+-O certo e *) e não *} ;
+-O *.gif|*.jpg|*.png} está errado. Além de usar } ao invés de ) está usando
+uma única parte do comando case para indicar que é gif,jpeg ou png
+=> (*.gif|*.jpg|*.png}
+-Está usando "" no $file => case "$file" in
+3 Erros!
+--------------------------------
+3-Resposta:
+#!/bin/bash
+
+arq=$1
+for arq in $1
+do
+  if [ -f $arq -gt 500 ]
+  then
+    echo -e $(ls)
+  else
+    echo -e "Menor que 500"
+  fi
+done
+
+--------------------------------
+4-#!/bin/bash
+
+for arq in $(ls -l)
+do
+   echo "$arq"
+done
+--------------------------------
+5-#!/bin/bash
+
+echo "Informe o numero IP:"
+read IP
+
+if [ ! -z ping $IP ]; then
+
+   ping -c 1 $IP
+   if [ $? -eq 0 ]; then
+     echo "Está retornando o IP!"
+   else
+     echo "Não está pingando!"
+   fi
+else
+  echo "IP vazio!"
+fi

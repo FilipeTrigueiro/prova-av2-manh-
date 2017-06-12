@@ -1,0 +1,6 @@
+#!/bin/bash
+
+for arq in $(ls -l)
+do
+   echo "$arq"
+done
